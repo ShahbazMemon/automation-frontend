@@ -1,0 +1,8 @@
+.web_logo_text {
+    font-size: 1.375rem;
+    letter-spacing: 3px;
+    margin-top: 3px;
+    color: black;
+    text-decoration: dotted;
+    /* color: transparent; */
+}

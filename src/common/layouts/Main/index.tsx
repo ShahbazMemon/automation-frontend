@@ -3,7 +3,7 @@ import React from "react";
 // Components
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
+import Drawer from "../../Drawer";
 type MainLayoutProps = {
   children: React.ReactNode;
 };
@@ -11,9 +11,16 @@ type MainLayoutProps = {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <div style={{ display: "flex" }}>
+        <div>
+          <Drawer />
+        </div>
+        <div style={{ width: "100%" }}>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </div>
+      </div>
     </>
   );
 };
