@@ -45,9 +45,9 @@ export default function MultipleSelect({title, items, handleChange, selectedOpti
             <MenuItem
               key={i}
               value={item.link}
-              style={getStyles(item.value, selectedOption, theme)}
+              style={getStyles(item.title, selectedOption, theme)}
             >
-              {item.value}
+              {item.title}
             </MenuItem>
           ))}
         </Select>

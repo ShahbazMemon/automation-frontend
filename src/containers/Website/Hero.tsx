@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
-import { Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Box, Typography, Button } from "@mui/material";
+// import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { styled } from "@mui/material/styles";
-// import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import QueueCard from "../../common/components/QueueCard";
-import CardSummary from "../../common/components/CardSummary";
-import Summary from "./Summary";
-import Progress from "../../common/components/Progress";
 
 // components//
+import QueueCard from "@/common/components/QueueCard";
 import Selector from "@/common/components/Selector";
+import Table from "@/common/components/tables/Table";
+import Summary from "./Summary";
+
 
 const Website = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [websites, setWebsites] = useState([
     {
-      value: "Clutch",
+      title: "Clutch",
       link: "https://clutch.co/",
     },
     {
-      value: "def",
+      title: "def",
       link: "....",
     },
     {
-      value: "ghi",
+      title: "ghi",
       link: "....",
     },
     {
-      value: "jkl",
+      title: "jkl",
       link: "....",
     },
   ]);
-
   const [queues, setQueues] = useState([
     {
       title: "Message",
@@ -56,10 +54,9 @@ const Website = () => {
       },
     },
   ]);
-
-  const [responseData, setResponseData] = useState({
+  const [summary, setSummary] = useState({
     totalCompanyScrap: 120,
-    graphData: [],
+    industrydata: [{title:"Web Development", link: "...."},{title:"Mobile Application", link: ""},{title:"Blockchain", link: "..."}],
   });
 
   // styled //
@@ -71,10 +68,20 @@ const Website = () => {
     color: theme.palette.text.secondary,
   }));
 
+  useEffect(()=>{
+    // will fetch websites from db 
+    //setWebsites(....)
+    // will fetch data of companies scapped today
+    // will fetch industries
+    //setSummary(....)
+    console.log("run");
+  },[]);
+
   const handleChange = (e: any) => {
     const result = e.target.value;
     setSelectedOption(result);
-    console.log("e >>", result);
+    // hit api for scap data  
+    // and set setQueues()
   };
 
   const onSubmit = () => {
@@ -91,7 +98,6 @@ const Website = () => {
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
-              // backgroundColor: "ActiveBorder",
             }}
           >
             <Selector
@@ -131,7 +137,10 @@ const Website = () => {
           </Grid>
         </div>
         <div style={{ padding: "15px 0px" }}>
-          <Summary title="Companies Scrapped Today" data={responseData} />
+          <Summary data={summary} />
+        </div>
+        <div style={{ padding: "15px 0px" }}>
+           <Table/>
         </div>
       </Container>
     </section>

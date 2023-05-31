@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   );
 };
 
-Home.getLayout = function getLayout(page) {
+Home.getLayout = function getLayout(page: any) {
   return <MainLayout>{page}</MainLayout>;
 };
 
