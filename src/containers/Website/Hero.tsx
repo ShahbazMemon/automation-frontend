@@ -8,7 +8,8 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import QueueCard from "../../common/components/QueueCard";
-import CardSummary from '../../common/components/CardSummary'
+import CardSummary from "../../common/components/CardSummary";
+import Summary from "./Summary";
 import Progress from "../../common/components/Progress";
 
 // components//
@@ -53,11 +54,16 @@ const Website = () => {
       progressBar: {
         total: 150,
       },
-    }
+    },
   ]);
 
+  const [responseData, setResponseData] = useState({
+    totalCompanyScrap: 120,
+    graphData: [],
+  });
+
   // styled //
-  const Item = styled(Paper)(({ theme }) => ({
+  const Item = styled(Paper)(({ theme }: any) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -85,7 +91,7 @@ const Website = () => {
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: "ActiveBorder",
+              // backgroundColor: "ActiveBorder",
             }}
           >
             <Selector
@@ -103,40 +109,30 @@ const Website = () => {
             </Button>
           </Box>
         </div>
-        <div>
-          <Typography variant="h4" color="black">
+        <div style={{ padding: "15px 0px" }}>
+          <Typography variant="h5" pb={2} color="black">
             Queues Progress
           </Typography>
-          <div style={{padding: "15px 0px"}}>
           <Grid container spacing={1.5} columns={12}>
             {queues.map((queue, i) => {
               return (
-                <Grid item xs={12} md={6} lg={4} key={i} style={{alignItems: "center"}}>
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  lg={4}
+                  key={i}
+                  style={{ alignItems: "center" }}
+                >
                   <QueueCard item={queue} />
                 </Grid>
               );
             })}
           </Grid>
-          </div>
         </div>
-        <Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-            <CardSummary
-              title="Problems completed today"
-              value={5}
-              footer={<div> 24% increase from yesterday </div>}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-            <CardSummary
-              title="Problems completed today"
-              value={5}
-              footer={<div> 24% increase from yesterday </div>}
-            />
-          </Grid>
-        </Grid>
-        </Box>
+        <div style={{ padding: "15px 0px" }}>
+          <Summary title="Companies Scrapped Today" data={responseData} />
+        </div>
       </Container>
     </section>
   );

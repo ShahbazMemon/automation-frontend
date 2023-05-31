@@ -16,7 +16,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           <Drawer />
         </div>
         <div style={{ width: "100%" }}>
-          {/* <Navbar /> */}
+          <Navbar />
           <main>{children}</main>
           <Footer />
         </div>

@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import { useAppSelector } from "@/common/hooks/store";
 
 const Navbar = () => {
-  const siteName = useAppSelector((state) => state.app.siteName);
+  const siteName = useAppSelector((state : any) => state.app.siteName);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

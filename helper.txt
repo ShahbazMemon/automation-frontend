@@ -1,0 +1,6 @@
+type summaryProps ={
+  totalCompanyScrap: number;
+}
+in componenet prop => ({data }: {data:Array<summaryProps>})
+
+///it is showing that the comming data will be type of array and araay have obj with property of totalCompanyScrap
