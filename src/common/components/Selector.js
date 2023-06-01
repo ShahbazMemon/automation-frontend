@@ -5,6 +5,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { styled } from '@mui/material';
+import { Controller } from 'react-hook-form';
+import {useFormContext} from 'react-hook-form' 
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -26,12 +29,36 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect({title, items, handleChange, selectedOption }) {
-  const theme = useTheme();
+const CustomSelect = styled(Select)({
+  borderBottom: '1px solid gray',
+  '&:hover': {
+    borderBottom: '2px solid blue', // Optional: Change the style on hover
+  },
+});
 
+export default function MultipleSelect({title, control, items, defaultValue, handleChange}) {
+  // const theme = useTheme();
+  const {setValue} = useFormContext()
+  setValue()
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <Controller
+      {...reg}
+      name={title}
+      control={control}
+      defaultValue={defaultValue}
+      render={({ field }) => (
+        <Select {...field} onChange={handleChange}>
+          <MenuItem value="">None</MenuItem>
+          {items.map((item, i) => (
+            <MenuItem key={i} value={item.value}>
+              {item.title}
+            </MenuItem>
+          ))}
+        </Select>
+      )}
+    />
+      {/* <FormControl sx={{ m: 1, width: 300}}>
         <InputLabel id="demo-simple-select-label">{title}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -44,14 +71,14 @@ export default function MultipleSelect({title, items, handleChange, selectedOpti
           {items.map((item, i ) => (
             <MenuItem
               key={i}
-              value={item.link}
+              value={item}
               style={getStyles(item.title, selectedOption, theme)}
             >
               {item.title}
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
+      </FormControl> */}
     </div>
   );
 }
