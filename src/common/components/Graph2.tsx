@@ -12,7 +12,7 @@ type graphKeys = {
 //   graphData: Array<graphKeys>; //graphKeys
 // };
 
-const Graph2 = ({ graphData }: { graphData: Array<graphKeys>}) => {
+const Graph2 = ({ graphData, mode }: { graphData: Array<graphKeys>, mode: any}) => {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   console.log("graphData >>", graphData);
   
@@ -30,8 +30,8 @@ const Graph2 = ({ graphData }: { graphData: Array<graphKeys>}) => {
         type: 'pie',
         allowPointSelect: true,
         keys: ['name', 'y', 'selected', 'sliced'],
-        data: graphData.map((ele)=>{
-          return {name: ele?.title, y : ele.person}
+        data: graphData.map((ele : {title : string, [key : string] : any})=>{
+          return {name: ele?.title, y : ele[mode]}
         }),
         showInLegend: true
       }]

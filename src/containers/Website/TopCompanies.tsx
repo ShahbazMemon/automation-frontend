@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useForm } from 'react-hook-form';
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Table from "@/common/components/tables/Table";
-import Checkbox from "./Checkbox";
 import Industry from "./IndustrySelector";
 import Graph2 from "@/common/components/Graph2";
 
@@ -16,14 +14,17 @@ type topCompaniesProps = {
 };
 
 const TopCompanies = ({ data }: { data: topCompaniesProps }) => {
-
-  const { control } = useForm();
-
-  // const [selectedIndustry, setSelectedIndustry] = useState("");
-  const [filterMode, setFilterMode] = useState(data?.industrydata);
+  const [selectedOption, setSelectedOption] = useState([]);
   const [industry, setIndustry] = useState(data?.industrydata);
-  const [filter, setFilter] = useState("");
-  const [location, setLocation] = useState("");
+  const [filter, setFilter] = useState([
+    { title: "Length", link: "person" },
+    { title: "PayScale", link: "payScale" },
+  ]);
+  const [location, setLocation] = useState([
+    { title: "option4", link: "Option 4" },
+    { title: "option5", link: "Option 5" },
+    { title: "option6", link: "Option 6" },
+  ]);
   const [graphData, setGraphData] = useState([
     {
       title: "Expedey",
@@ -48,7 +49,7 @@ const TopCompanies = ({ data }: { data: topCompaniesProps }) => {
     {
       title: "Salesoft",
       person: 643,
-      payScale: 1200,
+      payScale: 200,
     },
     {
       title: "Vivo",
@@ -81,42 +82,27 @@ const TopCompanies = ({ data }: { data: topCompaniesProps }) => {
       payScale: 1200,
     },
   ]);
-
-  // handlers
+  const [custom, setCustom] = useState({
+    filterMode : "" 
+  }); 
 
   //   action on selector
-  const handleChange = (name : any,  value: any) => {
-
-    console.log(name,value);
-    
-    // if (targetKey === "industry") {
-    //   // setSelectedOption(targer?.title);
-    // } else if (targetKey === "filter"){
-      
-    // } else {
-    //   console.log("temp")
-    // }
-
-    // setSelectedOption(result);
-    // // hit api and get selected industry data
-    // // and then set into setGraphData()
-    
-    
-    // setGraphData([result]);
+  const apiCallEvent = (data : any) => {
+        //  api work remaining 
+        console.log(data);
+        setCustom({...custom, filterMode : data.filter})
   };
 
   return (
     <>
       <Industry
-        control={control}
         industry={industry}
         filter={filter}
         location={location}
-        handleChange={handleChange}
-        // selectedOption={selectedOption}
+        apiCallEvent={apiCallEvent}
       />
       <Box p={"15px 0px"}>
-        <Graph2 graphData={graphData} />
+        <Graph2 graphData={graphData} mode = {custom.filterMode}/>
       </Box>
       <Box p={"15px 0px"}>
         <Typography variant="h5" pb={2} color="black">

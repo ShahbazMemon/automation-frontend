@@ -1,53 +1,50 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Selector from "@/common/components/Selector";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, useWatch } from "react-hook-form";
 
-const Industry = ({ control, industry, handleChange, selectedOption }: any) => {
+const Industry = ({industry, filter, location, apiCallEvent} : any) => {
+  
   const methods = useForm();
+  const watchAllFields = useWatch({control : methods.control}); 
+
+  // useEffect(() => {
+  //   const subscription = watch((value, { name, type }) => console.log(value, name, type));
+  //   return () => subscription.unsubscribe();
+  // }, [watch]);
+
+  useEffect(()=>{
+    console.log(watchAllFields);
+    apiCallEvent(watchAllFields)
+  }, [watchAllFields]);
+
   return (
     <>
       <FormProvider {...methods}>
         <form>
-          <Grid container spacing={1.5} columns={12}>
-            <Grid item xs={12} md={6} lg={4}>
-              <Typography variant="h6" pb={1} color="black">
-                Industry
-              </Typography>
+          <Grid container spacing={10} columns={12}>
+            <Grid item xs={6} md={4} lg={3}>
               <Selector
                 title="Industry Name"
-                control={control}
+                defaultValue={industry[0]}
                 items={industry}
-                defaultValue=""
-                handleChange={(e: any) =>
-                  handleChange("industry", e.target.value)
-                }
+                name="industry"
               />
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Typography variant="h6" pb={1} color="black">
-                Filter Mode
-              </Typography>
+            <Grid item xs={6} md={4} lg={3}>
               <Selector
                 title="Filter"
-                control={control}
-                items={industry}
-                defaultValue=""
-                handleChange={(e: any) =>
-                  handleChange("filter", e.target.value)
-                }
+                defaultValue={filter[0]}
+                items={filter}
+                name="filter"
               />
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <Typography variant="h6" pb={1} color="black">
-                Temp
-              </Typography>
+            <Grid item xs={6} md={4} lg={3}>
               <Selector
-                title="Temp"
-                control={control}
-                items={industry}
-                defaultValue=""
-                handleChange={(e: any) => handleChange("temp", e.target.value)}
+                title="Location"
+                defaultValue={location[0]}
+                items={location}
+                name="location"
               />
             </Grid>
           </Grid>

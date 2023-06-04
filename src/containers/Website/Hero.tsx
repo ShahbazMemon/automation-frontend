@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
-import { Box, Typography, Button } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -10,8 +9,10 @@ import QueueCard from "@/common/components/QueueCard";
 import Selector from "@/common/components/Selector";
 import Summary from "./Summary";
 import TopCompanies from "./TopCompanies";
+import { FormProvider, useForm } from "react-hook-form";
 
 const Website = () => {
+  const methods = useForm();
   // styled //
   const Item = styled(Paper)(({ theme }: any) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -69,7 +70,7 @@ const Website = () => {
       { title: "Blockchain", link: "..." },
     ],
   });
-
+  
   useEffect(() => {
     // will fetch websites from db
     //setWebsites(....)
@@ -90,14 +91,22 @@ const Website = () => {
   return (
     <section>
       <Container>
-        <Box p={"20px 0px"}>
-          <Selector
-            title={"Website Name"}
-            items={websites}
-            handleChange={handleChange}
-            selectedOption={selectedOption}
-          />
-        </Box>
+        <FormProvider {...methods}>
+          <form>
+            <Grid p={"15px 0px"} container spacing={10} columns={12}>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Selector
+                  title={"Website Name"}
+                  defaultValue={websites[0]}
+                  items={websites}
+                  handleChange={handleChange}
+                  name={"website"}
+                  // selectedOption={selectedOption}
+                />
+              </Grid>
+            </Grid>
+          </form>
+        </FormProvider>
         <div style={{ padding: "15px 0px" }}>
           <Typography variant="h5" pb={2} color="black">
             Queues Progress
