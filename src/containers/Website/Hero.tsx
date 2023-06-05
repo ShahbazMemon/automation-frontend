@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
-import { Box, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 // components//
-import QueueCard from "@/common/components/QueueCard";
 import Selector from "@/common/components/Selector";
+import QueueCard from "@/common/components/QueueCard";
 import Summary from "./Summary";
-import TopCompanies from "./TopCompanies";
-import { FormProvider, useForm } from "react-hook-form";
+import CompaniesDetail from "./CompaniesDetail";
 
-const Website = () => {
+const Hero = () => {
   const methods = useForm();
-  // styled //
-  const Item = styled(Paper)(({ theme }: any) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
   // states
   const [selectedOption, setSelectedOption] = useState("");
@@ -97,9 +87,9 @@ const Website = () => {
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <Selector
                   title={"Website Name"}
-                  defaultValue={websites[0]}
+                  defaultValue={""}
                   items={websites}
-                  handleChange={handleChange}
+                  // handleChange={handleChange}
                   name={"website"}
                   // selectedOption={selectedOption}
                 />
@@ -132,11 +122,11 @@ const Website = () => {
           <Summary data={data} />
         </div>
         <div style={{ padding: "15px 0px" }}>
-          <TopCompanies data={data} />
+          <CompaniesDetail data={data} />
         </div>
       </Container>
     </section>
   );
 };
 
-export default Website;
+export default Hero;

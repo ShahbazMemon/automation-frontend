@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Table from "@/common/components/tables/Table";
-import Industry from "./IndustrySelector";
-import Graph2 from "@/common/components/Graph2";
+import FilterDropdowns from "./FilterDropdowns";
+import Graph from "@/common/components/Graph";
 
 type industryKeys = {
   title: string;
@@ -13,14 +13,14 @@ type topCompaniesProps = {
   industrydata: Array<industryKeys>; //graphKeys
 };
 
-const TopCompanies = ({ data }: { data: topCompaniesProps }) => {
+const CompaniesDetail = ({ data }: { data: topCompaniesProps }) => {
   const [selectedOption, setSelectedOption] = useState([]);
-  const [industry, setIndustry] = useState(data?.industrydata);
-  const [filter, setFilter] = useState([
+  const [industries, setIndustries] = useState(data?.industrydata);
+  const [filterModes, setFilterModes] = useState([
     { title: "Length", link: "person" },
     { title: "PayScale", link: "payScale" },
   ]);
-  const [location, setLocation] = useState([
+  const [locations, setLocations] = useState([
     { title: "option4", link: "Option 4" },
     { title: "option5", link: "Option 5" },
     { title: "option6", link: "Option 6" },
@@ -83,26 +83,26 @@ const TopCompanies = ({ data }: { data: topCompaniesProps }) => {
     },
   ]);
   const [custom, setCustom] = useState({
-    filterMode : "" 
-  }); 
+    filterMode: ""
+  });
 
   //   action on selector
-  const apiCallEvent = (data : any) => {
-        //  api work remaining 
-        console.log(data);
-        setCustom({...custom, filterMode : data.filter})
+  const apiCallEvent = (data: any) => {
+    //  api work remaining 
+    console.log("data >", data);
+    setCustom({ ...custom, filterMode: data.filter })
   };
 
   return (
     <>
-      <Industry
-        industry={industry}
-        filter={filter}
-        location={location}
+      <FilterDropdowns
+        industries={industries}
+        filterModes={filterModes}
+        locations={locations}
         apiCallEvent={apiCallEvent}
       />
       <Box p={"15px 0px"}>
-        <Graph2 graphData={graphData} mode = {custom.filterMode}/>
+        <Graph graphData={graphData} mode={custom.filterMode} />
       </Box>
       <Box p={"15px 0px"}>
         <Typography variant="h5" pb={2} color="black">
@@ -116,4 +116,4 @@ const TopCompanies = ({ data }: { data: topCompaniesProps }) => {
   );
 };
 
-export default TopCompanies;
+export default CompaniesDetail;

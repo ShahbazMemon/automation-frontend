@@ -12,7 +12,7 @@ type graphKeys = {
 //   graphData: Array<graphKeys>; //graphKeys
 // };
 
-const Graph2 = ({ graphData, mode }: { graphData: Array<graphKeys>, mode: any}) => {
+const Graph = ({ graphData, mode }: { graphData: Array<graphKeys>, mode: any}) => {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   console.log("graphData >>", graphData);
   
@@ -49,4 +49,4 @@ const Graph2 = ({ graphData, mode }: { graphData: Array<graphKeys>, mode: any}) 
   );
 };
 
-export default Graph2;
+export default Graph;

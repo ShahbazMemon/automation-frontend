@@ -13,10 +13,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     <>
       <div style={{ display: "flex" }}>
         <div>
-          <Drawer />
+          <Drawer/>
         </div>
-        <div style={{ width: "100%" }}>
-          <Navbar />
+        <div style={{ width: "100%", paddingTop:"80px" }}>
+          {/* <Navbar /> */}
           <main>{children}</main>
           <Footer />
         </div>

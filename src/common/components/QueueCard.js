@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Progress from "./Progress";
 
-export default function MediaControlCard({ item }) {
+export default function QueueCard({ item }) {
   console.log(item);
 
   const theme = useTheme();

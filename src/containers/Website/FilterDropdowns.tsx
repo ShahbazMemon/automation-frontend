@@ -1,19 +1,14 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import Selector from "@/common/components/Selector";
 import { useForm, FormProvider, useWatch } from "react-hook-form";
 
-const Industry = ({industry, filter, location, apiCallEvent} : any) => {
-  
+const FilterDropdowns = ({ industries, filterModes, locations, apiCallEvent }: any) => {
+
   const methods = useForm();
-  const watchAllFields = useWatch({control : methods.control}); 
+  const watchAllFields = useWatch({ control: methods.control });
 
-  // useEffect(() => {
-  //   const subscription = watch((value, { name, type }) => console.log(value, name, type));
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
-
-  useEffect(()=>{
+  useEffect(() => {
     console.log(watchAllFields);
     apiCallEvent(watchAllFields)
   }, [watchAllFields]);
@@ -22,28 +17,28 @@ const Industry = ({industry, filter, location, apiCallEvent} : any) => {
     <>
       <FormProvider {...methods}>
         <form>
-          <Grid container spacing={10} columns={12}>
+          <Grid p={"15px 0px"} container spacing={10} columns={12}>
             <Grid item xs={6} md={4} lg={3}>
               <Selector
                 title="Industry Name"
-                defaultValue={industry[0]}
-                items={industry}
+                defaultValue={""}
+                items={industries}
                 name="industry"
               />
             </Grid>
             <Grid item xs={6} md={4} lg={3}>
               <Selector
                 title="Filter"
-                defaultValue={filter[0]}
-                items={filter}
+                defaultValue={""}
+                items={filterModes}
                 name="filter"
               />
             </Grid>
             <Grid item xs={6} md={4} lg={3}>
               <Selector
                 title="Location"
-                defaultValue={location[0]}
-                items={location}
+                defaultValue={""}
+                items={locations}
                 name="location"
               />
             </Grid>
@@ -54,4 +49,4 @@ const Industry = ({industry, filter, location, apiCallEvent} : any) => {
   );
 };
 
-export default Industry;
+export default FilterDropdowns;

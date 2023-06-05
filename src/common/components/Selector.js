@@ -1,12 +1,7 @@
 import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography, styled } from "@mui/material";
-import { Controller } from "react-hook-form";
 import { useFormContext } from "react-hook-form";
 
 const ITEM_HEIGHT = 48;
@@ -20,30 +15,13 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 
-const CustomSelect = styled(Select)({
-  // borderLeft: "0px solid",
-  borderBottom: "1px solid gray",
-  "&:hover": {
-    borderBottom: "2px solid blue", // Optional: Change the style on hover
-  },
-});
-
-export default function MultipleSelect({
+export default function Selector({
   title,
   defaultValue,
   items,
   name,
 }) {
-  const theme = useTheme();
 
   const methods = useFormContext();
   return (
